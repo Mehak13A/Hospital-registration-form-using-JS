@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hospital Registration Form</title>
+  <style>
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Hospital Registration Form</h1>
+
+  <form id="registrationForm" onsubmit="validateForm(event)">
+    <label for="firstName">Patient's First Name:</label>
+    <input type="text" id="fName" name="firstName" required>
+    <span id="firstNameError" class="error"></span>
+
+    <br><br>
+    
+    <form id="registrationForm" onsubmit="validateForm(event)">
+    <label for="lastName">Patient's Last Name:</label>
+    <input type="text" id="lName" name="lastName" required>
+    <span id="lastNameError" class="error"></span>
+      
+    <br><br>
+      
+    <form id="registrationForm" onsubmit="validateForm(event)">
+    <label for="gender">Patient's Gender:</label>
+    <input type="radio" id="gender" name="gender" required> Male
+    <input type="radio" id="gender" name="gender" required> Female
+    <input type="radio" id="gender" name="gender" required> Other
+    <span id="genderError" class="error"></span>
+      
+    <br><br>
+      
+    <form id="registrationForm" onsubmit="validateForm(event)">
+    <label for="bloodGroup">Patient's Blood Group:</label>
+    <input type="text" id="bg" name="bloodGroup" required>
+    <span id="bgError" class="error"></span>
+
+    <br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <span id="emailError" class="error"></span>
+
+    <br><br>
+
+    <label for="phoneNumber">Phone Number:</label>
+    <input type="tel" id="phoneNumber" name="phoneNumber" required>
+    <span id="phoneNumberError" class="error"></span>
+
+    <br><br>
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age" required>
+    <span id="ageError" class="error"></span>
+
+    <br><br>
+
+    <input type="submit" value="Submit">
+  </form>
+
+  <script>
+    function validateForm(event) {
+      event.preventDefault(); // Prevent form submission and handle validation
+
+      // Clear previous error messages
+      clearErrors();
+
+      // Validate First Name
+      var firstNameInput = document.getElementById("fName");
+      var firstNameError = document.getElementById("firstNameError");
+      if (firstNameInput.value.trim() === "") {
+        firstNameError.textContent = "First Name is required";
+      }
+      
+      // Validate Last Name
+      var lastNameInput = document.getElementById("lName");
+      var lastNameError = document.getElementById("lastNameError");
+      if (lastNameInput.value.trim() === "") {
+        lastNameError.textContent = "Last Name is required";
+      }
+      
+      // Validate Gender
+      var genderInput = document.getElementById("gender");
+      var lastNameError = document.getElementById("genderError");
+      if (genderInput.value.trim() === "") {
+        genderError.textContent = "Gender is required";
+      }
+      
+       // Validate Blood Group
+      var genderInput = document.getElementById("bg");
+      var bgError = document.getElementById("bgError");
+      if (bloodGroupInput.value.trim() === "") {
+        bgError.textContent = "Blood Group is required";
+      }
+
+      // Validate Email
+      var emailInput = document.getElementById("email");
+      var emailError = document.getElementById("emailError");
+      if (emailInput.value.trim() === "") {
+        emailError.textContent = "Email is required";
+      } else if (!isValidEmail(emailInput.value)) {
+        emailError.textContent = "Invalid Email";
+      }
+
+      // Validate Phone Number
+      var phoneNumberInput = document.getElementById("phoneNumber");
+      var phoneNumberError = document.getElementById("phoneNumberError");
+      if (phoneNumberInput.value.trim() === "") {
+        phoneNumberError.textContent = "Phone Number is required";
+      } else if (!isValidPhoneNumber(phoneNumberInput.value)) {
+        phoneNumberError.textContent = "Invalid Phone Number";
+      }
+
+      // Validate Age
+      var ageInput = document.getElementById("age");
+      var ageError = document.getElementById("ageError");
+      if (ageInput.value.trim() === "") {
+        ageError.textContent = "Age is required";
+      } else if (isNaN(ageInput.value) || ageInput.value < 1) {
+        ageError.textContent = "Invalid Age";
+      }
+
+      // If there are no errors, submit the form
+      if (!fullNameError.textContent && !emailError.textContent && !phoneNumberError.textContent && !ageError.textContent) {
+        document.getElementById("registrationForm").submit();
+      }
+    }
+
+    function isValidEmail(email) {
+      // Simple email validation using regex
+      var emailRegex = /^\S+@\S+\.\S+$/;
+      return emailRegex.test(email);
+    }
+
+    function isValidPhoneNumber(phoneNumber) {
+      // Simple phone number validation using regex
+      var phoneNumberRegex = /^\d{10}$/; // 10-digit number
+      return phoneNumberRegex.test(phoneNumber);
+    }
+
+    function clearErrors() {
+      var errorElements = document.getElementsByClassName("error");
+      for (var i = 0; i < errorElements.length; i++) {
+        errorElements[i].textContent = "";
+      }
+    }
+  </script>
+</body>
+</html>
